@@ -18,7 +18,7 @@ const DevNotification = () => {
       anchorOrigin={{ vertical: "top", horizontal: "center" }}
     >
       <Alert onClose={handleClose} severity="info" sx={{ width: "100%" }}>
-        🚧 This page is under development!
+        🚧 This site is under development!
       </Alert>
     </Snackbar>
   );
