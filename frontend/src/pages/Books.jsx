@@ -1,64 +1,28 @@
-import React, { useState } from "react";
-import { FaSearch } from "react-icons/fa";
+import { Box, Grid, Typography } from "@mui/material";
+import BookCard from "../components/BookCard";
+import BackToHome from "../components/BackToHome";
 
-const booksData = [
-  { id: 1, title: "The Great Gatsby", author: "F. Scott Fitzgerald", genre: "Classic" },
-  { id: 2, title: "1984", author: "George Orwell", genre: "Dystopian" },
-  { id: 3, title: "To Kill a Mockingbird", author: "Harper Lee", genre: "Classic" },
-  { id: 4, title: "The Hobbit", author: "J.R.R. Tolkien", genre: "Fantasy" },
+const books = [
+  { title: "JavaScript Essentials", author: "John Doe", image: "/books/js-essentials.jpg", link: "#" },
+  { title: "React for Beginners", author: "Jane Smith", image: "/books/react-beginners.jpg", link: "#" },
+  { title: "Python Mastery", author: "Alex Johnson", image: "/books/python-mastery.jpg", link: "#" },
 ];
 
 const Books = () => {
-  const [search, setSearch] = useState("");
-  const [filter, setFilter] = useState("");
-
-  const filteredBooks = booksData.filter(
-    (book) =>
-      book.title.toLowerCase().includes(search.toLowerCase()) &&
-      (filter ? book.genre === filter : true)
-  );
-
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-10">
-      <h1 className="text-3xl font-bold mb-6">Books Collection</h1>
-      
-      {/* Search and Filter */}
-      <div className="flex gap-4 mb-6">
-        <div className="relative w-1/2">
-          <input
-            type="text"
-            placeholder="Search books..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="w-full px-4 py-2 bg-gray-800 text-white rounded-lg outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <FaSearch className="absolute top-3 right-4 text-gray-400" />
-        </div>
-        <select
-          className="px-4 py-2 bg-gray-800 text-white rounded-lg outline-none"
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-        >
-          <option value="">All Genres</option>
-          <option value="Classic">Classic</option>
-          <option value="Dystopian">Dystopian</option>
-          <option value="Fantasy">Fantasy</option>
-        </select>
-      </div>
-
-      {/* Books Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredBooks.map((book) => (
-          <div key={book.id} className="bg-gray-800 p-6 rounded-xl shadow-md">
-            <h2 className="text-xl font-semibold">{book.title}</h2>
-            <p className="text-gray-400">by {book.author}</p>
-            <span className="inline-block mt-2 px-3 py-1 text-sm bg-blue-600 rounded-full">
-              {book.genre}
-            </span>
-          </div>
+    <Box sx={{ py: 5, px: 2, textAlign: "center" }}>
+        <BackToHome />
+      <Typography variant="h4" fontWeight="bold" mb={3}>
+        Free Books Collection
+      </Typography>
+      <Grid container spacing={3} sx={{ justifyContent: "center" }}>
+        {books.map((book, index) => (
+          <Grid item xs={12} sm={6} md={4} key={index}>
+            <BookCard book={book} />
+          </Grid>
         ))}
-      </div>
-    </div>
+      </Grid>
+    </Box>
   );
 };
 
